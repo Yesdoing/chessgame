@@ -1,4 +1,4 @@
-package chess;
+package pieces;
 
 public class Pawn {
 	public static final String PIECE_BLACK = "black";
@@ -10,7 +10,7 @@ public class Pawn {
 		this.color = "white";
 	}
 	
-	Pawn(String color) {
+	public Pawn(String color) {
 		this.color = color;
 	}
 
