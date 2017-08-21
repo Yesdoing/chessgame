@@ -1,8 +1,11 @@
-package piece;
+package chess;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import chess.Board;
+import chess.Pawn;
 
 public class BoardTest {
 	

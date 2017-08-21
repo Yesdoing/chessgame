@@ -1,4 +1,4 @@
-package piece;
+package chess;
 
 public class Pawn {
 	public static final String PIECE_BLACK = "black";
