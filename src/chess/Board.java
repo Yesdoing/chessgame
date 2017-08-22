@@ -3,14 +3,13 @@ package chess;
 import java.util.ArrayList;
 
 import pieces.Pawn;
+import static utils.StringUtils.appendNewLine;
 
 public class Board {
 	ArrayList<Pawn> white_pieces;
 	ArrayList<Pawn> black_pieces;
 	
 	Board() {
-		white_pieces = new ArrayList<>();
-		black_pieces = new ArrayList<>();
 	}
 	
 	void addWhitePawn(Pawn pawn) {
@@ -36,33 +35,43 @@ public class Board {
 		return black_pieces.size();
 	}
 	
-	String print() {
+	String getSeparator() {
+		return "........";
+	}
+	
+	void print() {
 		StringBuilder sb = new StringBuilder();
-		String line = "........\n";
-		sb.append(line);
+		sb.append(getSeparator());
+		sb.append(appendNewLine());
 		sb.append(getBlackPawnsResult());
-		sb.append("\n");
-		sb.append(line);
-		sb.append(line);
-		sb.append(line);
-		sb.append(line);
+		sb.append(appendNewLine());
+		sb.append(getSeparator());
+		sb.append(appendNewLine());
+		sb.append(getSeparator());
+		sb.append(appendNewLine());
+		sb.append(getSeparator());
+		sb.append(appendNewLine());
+		sb.append(getSeparator());
+		sb.append(appendNewLine());
 		sb.append(getWhitePawnsResult());
-		sb.append("\n");
-		sb.append(line);
+		sb.append(appendNewLine());
+		sb.append(getSeparator());
+		sb.append(appendNewLine());
 		
-		return sb.toString();
+		System.out.println(sb.toString());
 	}
 	
 	void initialize() {
-		generatePieces(white_pieces, Pawn.PIECE_WHITE, Pawn.PIECE_WHITE_REPRESENTATION);
-		generatePieces(black_pieces, Pawn.PIECE_BLACK, Pawn.PIECE_BLACK_REPRESENTATION);
+		white_pieces = generatePieces(Pawn.PIECE_WHITE, Pawn.PIECE_WHITE_REPRESENTATION);
+		black_pieces = generatePieces(Pawn.PIECE_BLACK, Pawn.PIECE_BLACK_REPRESENTATION);
 	}
 
-	private void generatePieces(ArrayList<Pawn> pieces, String pawnColor, char pawnRepresentation) {
-		//pieces = new ArrayList<>();
+	private ArrayList<Pawn> generatePieces(String pawnColor, char pawnRepresentation) {
+		ArrayList<Pawn> pieces = new ArrayList<>();
 		for(int i=0; i<8; i++) {
 			pieces.add(new Pawn(pawnColor, pawnRepresentation));
 		}
+		return pieces;
 	}
 	
 
@@ -85,4 +94,5 @@ public class Board {
 	}
 	
 	
+ 	
 }
