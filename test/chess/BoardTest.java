@@ -18,23 +18,37 @@ public class BoardTest {
 	
 	@Test
 	public void board_폰_객체_추가하기() throws Exception {
-		board.addPawn(new Pawn("white"));
-		Pawn pawn = new Pawn("white");
-		assertEquals(pawn.getColor(), board.findPawn(0).getColor());
+		board.addWhitePawn(new Pawn(Pawn.PIECE_WHITE));
+		Pawn pawn = new Pawn(Pawn.PIECE_WHITE);
+		assertEquals(pawn.getColor(), board.findWhitePawn(0).getColor());
 	}
 	
 	@Test
 	public void create() throws Exception {
 		
-		Pawn white = new Pawn(Pawn.PIECE_WHITE);
-		board.addPawn(white);
-		assertEquals(1, board.size());
-		assertEquals(white, board.findPawn(0));
+		Pawn white = new Pawn(Pawn.PIECE_WHITE, Pawn.PIECE_WHITE_REPRESENTATION);
+		board.addWhitePawn(white);
+		assertEquals(1, board.white_pawn_size());
+		assertEquals(white, board.findWhitePawn(0));
 		
-		Pawn black = new Pawn(Pawn.PIECE_BLACK);
-		board.addPawn(black);
-		assertEquals(2, board.size());
-		assertEquals(black, board.findPawn(1));
+		Pawn black = new Pawn(Pawn.PIECE_BLACK, Pawn.PIECE_BLACK_REPRESENTATION);
+		board.addBlackPawn(black);
+		assertEquals(1, board.black_pawn_size());
+		assertEquals(black, board.findBlackPawn(0));
+	}
+	
+	
+	@Test
+	public void initialize() throws Exception {
+		board.initialize();
+		assertEquals("pppppppp", board.getWhitePawnsResult());
+		assertEquals("PPPPPPPP", board.getBlackPawnsResult());
+	}
+	
+	@Test
+	public void print() throws Exception {
+		board.initialize();
+		System.out.println(board.print());
 	}
 	
 }
