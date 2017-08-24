@@ -6,36 +6,50 @@ import pieces.Piece;
 import static utils.StringUtils.appendNewLine;
 
 public class Board {
+	private static int pieceCount = 0;
 	ArrayList<Piece> white_pieces = new ArrayList<>();
 	ArrayList<Piece> black_pieces = new ArrayList<>();
-
+	ArrayList<Piece> white_pawns = new ArrayList<>();
+	ArrayList<Piece> black_pawns = new ArrayList<>();
+	
 	ArrayList<ArrayList<Piece>> rank = new ArrayList<>();
 
 	Board() {
 	}
 
 	void addWhitePawn(Piece pawn) {
-		white_pieces.add(pawn);
+		pieceCount++;
+		white_pawns.add(pawn);
 	}
 
 	void addBlackPawn(Piece pawn) {
-		black_pieces.add(pawn);
+		pieceCount++;
+		black_pawns.add(pawn);
+	}
+
+	void addBlackPieces(Piece piece) {
+		pieceCount++;
+		black_pieces.add(piece);
+	}
+	
+	void addWhitePieces(Piece piece) {
+		pieceCount++;
+		white_pieces.add(piece);
 	}
 
 	Piece findWhitePawn(int index) {
+		return white_pawns.get(index);
+	}
+	Piece findWhitePieces(int index) {
 		return white_pieces.get(index);
 	}
 
 	Piece findBlackPawn(int index) {
+		return black_pawns.get(index);
+	}
+	
+	Piece findBlackPieces(int index) {
 		return black_pieces.get(index);
-	}
-
-	public int white_pawn_size() {
-		return white_pieces.size();
-	}
-
-	public int black_pawn_size() {
-		return black_pieces.size();
 	}
 
 	String getSeparator() {
@@ -43,90 +57,65 @@ public class Board {
 	}
 
 	String showBoard() {
+		String blankRank = appendNewLine("........");
 		StringBuilder sb = new StringBuilder();
-		for (ArrayList<Piece> line : rank) {
-			if (line.isEmpty()) {
-				sb.append(appendNewLine(getSeparator()));
-			} else {
-				sb.append(appendNewLine(printPieces(line)));				
-			}
-		}
-
+		sb.append(appendNewLine(getBlackPiecesResult()));
+		sb.append(appendNewLine(getBlackPawnsResult()));
+		sb.append(blankRank);
+		sb.append(blankRank);
+		sb.append(blankRank);
+		sb.append(blankRank);
+		sb.append(appendNewLine(getWhitePawnsResult()));
+		sb.append(appendNewLine(getWhitePiecesResult()));
 		return sb.toString();
 	}
 
 	void initialize() {
+		
+		addWhitePieces(Piece.createWhiteRook());
+		addWhitePieces(Piece.createWhiteKnight());
+		addWhitePieces(Piece.createWhiteBishop());
+		addWhitePieces(Piece.createWhiteQueen());
+		addWhitePieces(Piece.createWhiteKing());
+		addWhitePieces(Piece.createWhiteBishop());
+		addWhitePieces(Piece.createWhiteKnight());
+		addWhitePieces(Piece.createWhiteRook());
+		
 		for (int i = 0; i < 8; i++) {
-			rank.add(new ArrayList<Piece>());
+			addWhitePawn(Piece.createWhitePawn());
 		}
 		
-		generateWhitePieces();
-		generateBlackPieces();
-	}
-
-	private void generateWhitePieces() {
-		white_pieces.addAll(generateWhitePawns());
-		white_pieces.addAll(generateWhiteNobless());
 		
-		rank.set(7, generateWhiteNobless());
-		rank.set(6, generateWhitePawns());
-	}
-
-	private void generateBlackPieces() {
-		black_pieces.addAll(generateBlackPawns());
-		black_pieces.addAll(generateBlackNobless());
+		addBlackPieces(Piece.createBlackRook());
+		addBlackPieces(Piece.createBlackKnight());
+		addBlackPieces(Piece.createBlackBishop());
+		addBlackPieces(Piece.createBlackQueen());
+		addBlackPieces(Piece.createBlackKing());
+		addBlackPieces(Piece.createBlackBishop());
+		addBlackPieces(Piece.createBlackKnight());
+		addBlackPieces(Piece.createBlackRook());
 		
-		rank.set(0, generateBlackNobless());
-		rank.set(1, generateBlackPawns());
-	}
-
-	private ArrayList<Piece> generateWhiteNobless() {
-		ArrayList<Piece> pieces = new ArrayList<>();
-		pieces.add(Piece.createWhiteRook());
-		pieces.add(Piece.createWhiteKnight());
-		pieces.add(Piece.createWhiteBishop());
-		pieces.add(Piece.createWhiteQueen());
-		pieces.add(Piece.createWhiteKing());
-		pieces.add(Piece.createWhiteBishop());
-		pieces.add(Piece.createWhiteKnight());
-		pieces.add(Piece.createWhiteRook());
-		return pieces;
-	}
-
-	private ArrayList<Piece> generateWhitePawns() {
-		ArrayList<Piece> pieces = new ArrayList<>();
 		for (int i = 0; i < 8; i++) {
-			pieces.add(Piece.createWhitePawn());
+			addBlackPawn(Piece.createBlackPawn());
 		}
-		return pieces;
+		
+		
 	}
 
-	private ArrayList<Piece> generateBlackPawns() {
-		ArrayList<Piece> pieces = new ArrayList<>();
-		for (int i = 0; i < 8; i++) {
-			pieces.add(Piece.createBlackPawn());
-		}
-		return pieces;
-	}
-
-	private ArrayList<Piece> generateBlackNobless() {
-		ArrayList<Piece> pieces = new ArrayList<>();
-		pieces.add(Piece.createBlackRook());
-		pieces.add(Piece.createBlackKnight());
-		pieces.add(Piece.createBlackBishop());
-		pieces.add(Piece.createBlackQueen());
-		pieces.add(Piece.createBlackKing());
-		pieces.add(Piece.createBlackBishop());
-		pieces.add(Piece.createBlackKnight());
-		pieces.add(Piece.createBlackRook());
-		return pieces;
-	}
 
 	public String getWhitePawnsResult() {
+		return printPieces(white_pawns);
+	}
+
+	public String getWhitePiecesResult() {
 		return printPieces(white_pieces);
 	}
 
 	public String getBlackPawnsResult() {
+		return printPieces(black_pawns);
+	}
+	
+	public String getBlackPiecesResult() {
 		return printPieces(black_pieces);
 	}
 
@@ -139,7 +128,7 @@ public class Board {
 	}
 
 	public int pieceCount() {
-		return white_pawn_size() + black_pawn_size();
+		return pieceCount;
 	}
 
 }

@@ -29,14 +29,16 @@ public class BoardTest {
 	@Test
 	public void initialize() throws Exception {
 		board.initialize();
-		assertEquals("pppppppprnbqkbnr", board.getWhitePawnsResult());
-		assertEquals("PPPPPPPPRNBQKBNR", board.getBlackPawnsResult());
+		assertEquals("pppppppp", board.getWhitePawnsResult());
+		assertEquals("rnbqkbnr", board.getWhitePiecesResult());
+		assertEquals("PPPPPPPP", board.getBlackPawnsResult());
+		assertEquals("RNBQKBNR", board.getBlackPiecesResult());
 	}
 
-//	@Test
-//	public void print() throws Exception {
-//		board.initialize();
-//		board.showBoard();
-//	}
+	@Test
+	public void print() throws Exception {
+		board.initialize();
+		board.showBoard();
+	}
 
 }
