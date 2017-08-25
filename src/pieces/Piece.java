@@ -1,7 +1,7 @@
 package pieces;
 
 
-public class Piece {
+public class Piece implements Comparable<Piece>{
 	public enum Color {
 		WHITE, BLACK, NOCOLOR;
 	}
@@ -166,6 +166,13 @@ public class Piece {
 			return false;
 		return true;
 	}
+
+	@Override
+	public int compareTo(Piece o) {
+		if(type.defaultPoint < o.getType().defaultPoint) return 1;
+		return -1;
+	}
+	
 	
 	
 }

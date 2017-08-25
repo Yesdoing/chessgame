@@ -1,11 +1,14 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import pieces.Piece;
 import pieces.Piece.Color;
+import pieces.Piece.Type;
 
 import static utils.StringUtils.appendNewLine;
 
@@ -207,4 +210,27 @@ public class Board {
 		}
 		return sum;
 	}
+
+	public List<Piece> whitePieceSort() {
+		List<Piece> notSortedPieces = new ArrayList<>();
+		notSortedPieces.addAll(white_pieces);
+		notSortedPieces.addAll(white_pawns);
+		
+		Collections.sort(notSortedPieces);
+		
+		return notSortedPieces;
+	}
+
+	public List<Piece> blackPieceSort() {
+		List<Piece> notSortedPieces = new ArrayList<>();
+		notSortedPieces.addAll(black_pieces);
+		notSortedPieces.addAll(black_pawns);
+		
+		Collections.sort(notSortedPieces);
+		
+		return notSortedPieces;
+	}
+	
+	
+	
 }

@@ -11,6 +11,8 @@ import pieces.Piece.Color;
 
 import static utils.StringUtils.appendNewLine;
 
+import java.util.List;
+
 public class BoardTest {
 	Board board;
 
@@ -100,5 +102,19 @@ public class BoardTest {
 	public void printRankTest() throws Exception {
 		board.initialize();
 		System.out.println(board.showBoard());
+	}
+	
+	@Test
+	public void sortPieces() throws Exception {
+		board.initialize();
+		
+		List<Piece> temp = board.whitePieceSort();
+		for(Piece piece : temp) {
+			System.out.println(piece.printPiece());
+		}
+		temp = board.blackPieceSort();
+		for(Piece piece : temp) {
+			System.out.println(piece.printPiece());
+		}
 	}
 }
