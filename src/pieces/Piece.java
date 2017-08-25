@@ -7,14 +7,26 @@ public class Piece {
 	}
 	
 	public enum Type {
-		PAWN('p'), KNIGHT('n'), ROOK('r'), BISHOP('b'), QUEEN('q'), KING('k'), NO_PIECE('x');
+		PAWN('p', 1.0), 
+		KNIGHT('n', 2.5), 
+		ROOK('r', 5.0), 
+		BISHOP('b', 3.0), 
+		QUEEN('q', 9.0), 
+		KING('k', 0.0), 
+		NO_PIECE('.', 0.0);
 		
 		private char representation;
+		private double defaultPoint;
 		
-		Type (char representation) {
+		Type (char representation, double defaultPoint) {
 			this.representation = representation;
+			this.defaultPoint = defaultPoint;
 		}
 
+		public double getDefaultPoint() {
+			return defaultPoint;
+		}
+		
 		public char getWhiteRepresentation() {
 			return representation;
 		}
@@ -111,4 +123,31 @@ public class Piece {
 	public static Piece createBlank() {
 		return new Piece(Color.NOCOLOR, Type.NO_PIECE);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Piece other = (Piece) obj;
+		if (color != other.color)
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
+	}
+	
+	
 }

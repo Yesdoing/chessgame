@@ -14,5 +14,15 @@ public class CharacterTest {
 		assertTrue(Character.isJavaIdentifierPart('$'));
 		assertFalse(Character.isJavaIdentifierPart('\n'));
 	}
+	
+	@Test
+	public void subString() throws Exception {
+		String str = "a8";
+		
+		String row = str.substring(0, 1);
+		String col = str.substring(1);
+		
+		System.out.println(row + " " + col);
+	}
 
 }
