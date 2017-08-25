@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import pieces.Piece;
 import pieces.Piece.Color;
+import pieces.Piece.Type;
 
 public class Rank {
 	private ArrayList<Piece> rank = new ArrayList<>();
@@ -27,7 +28,7 @@ public class Rank {
 	public String printPieces() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < rank.size(); i++) {
-			sb.append(rank.get(i).getType().getWhiteRepresentation());
+			sb.append(rank.get(i).printPiece());
 		}
 		return sb.toString();
 	}
@@ -45,9 +46,20 @@ public class Rank {
 	
 	public double calculateRankPiece(Color color) {
 		double sum = 0.0;
+		int howPawn = 0;
+		
 		for(Piece piece : rank) {
-			
+			if(piece.getType() == Type.PAWN && piece.getColor() == color) {
+				howPawn++;
+			}
+			sum += piece.getPiecePoint(color);
 		}
+		
+		if(howPawn == 0) {
+			return sum;
+		}
+		
+		return sum - ((howPawn-1)*0.5);
 	}
 	
 }

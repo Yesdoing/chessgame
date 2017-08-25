@@ -38,22 +38,40 @@ public class Piece {
 		
 	Color color;
 	Type type;
-	
+		
 	public boolean isBlack() {
-		return this.color.equals(Color.BLACK);
+		return color == Color.BLACK;
 	}
 	
 	public boolean isWhite() {
-		return this.color.equals(Color.WHITE);
+		return color == Color.WHITE;
 	}
 	
+	public double getPiecePoint(Color color) {
+		if(this.color == color) {
+			return type.getDefaultPoint();
+		}
+		return 0.0;
+	}
 	
+	public char printPiece() {
+		if(isBlack()) {
+			return type.getBlackRepresentation();
+		}
+		if (isWhite()) {
+			return type.getWhiteRepresentation();			
+		}
+		
+		return type.getWhiteRepresentation();
+	}
 	
 	private Piece(Color color, Type representation) {
 		this.color = color;
 		this.type = representation;
 		
 	}
+	
+	
 	
 	private static Piece createWhite(Type type) {
 		return new Piece(Color.WHITE, type);

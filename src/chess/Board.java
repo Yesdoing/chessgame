@@ -200,9 +200,11 @@ public class Board {
 	}
 
 	public double caculcatePoint(Color color) {
+		double sum = 0.0;
 		for(Rank rank : ranks) {
-			
+			sum += rank.calculateRankPiece(color);
+			System.out.println(sum);
 		}
-		return 0;
+		return sum;
 	}
 }

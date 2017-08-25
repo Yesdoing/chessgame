@@ -34,7 +34,7 @@ public class BoardTest {
         addPiece("f1", Piece.createWhiteKing());
 
         assertEquals(15.0, board.caculcatePoint(Color.BLACK), 0.01);
-        assertEquals(7.0, board.caculcatePoint(Color.WHITE), 0.01);
+        assertEquals(6.5, board.caculcatePoint(Color.WHITE), 0.01);
 
         System.out.println(board.showBoard());
     }
@@ -60,8 +60,8 @@ public class BoardTest {
 		board.initialize();
 		assertEquals(32, board.pieceCount());
 		String blankRank = appendNewLine("........");
-		assertEquals(appendNewLine("RNBQKBNR") + appendNewLine("PPPPPPPP") + blankRank + blankRank + blankRank
-				+ blankRank + appendNewLine("pppppppp") + appendNewLine("rnbqkbnr"), board.showBoard());
+		assertEquals(appendNewLine("rnbqkbnr") + appendNewLine("pppppppp") + blankRank + blankRank + blankRank
+				+ blankRank + appendNewLine("PPPPPPPP") + appendNewLine("RNBQKBNR"), board.showBoard());
 	}
 
 	@Test
